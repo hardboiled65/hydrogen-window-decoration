@@ -70,39 +70,16 @@ DecorationButton {
         radius: width / 2
         smooth: true
         anchors.fill: parent
+        border.width: 1
+        border.color: '#9d9795'
         gradient: Gradient {
             GradientStop {
                 position: 0.0
-                color: button.conturTop
+                color: '#f0efee'
             }
             GradientStop {
-                position: 0.8
-                color: button.conturBottom
-            }
-        }
-        Rectangle {
-            radius: width / 2
-            smooth: true
-            anchors {
-                fill: parent
-                leftMargin: 2
-                rightMargin: 2
-                topMargin: 2
-                bottomMargin: 2
-            }
-            gradient: Gradient {
-                GradientStop {
-                    position: 0.3
-                    color: button.surfaceTop
-                }
-                GradientStop {
-                    position: 1.0
-                    color: button.surfaceBottom
-                }
-            }
-            border {
-                width: 1
-                color: Qt.darker("white", 1.6)
+                position: 1.0
+                color: '#d6d1ce'
             }
         }
     } // Button
