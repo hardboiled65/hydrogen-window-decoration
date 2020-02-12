@@ -85,7 +85,7 @@ Decoration {
     DecorationOptions { id: options; deco: decoration }
     
     property int borderSize: decorationSettings.borderSize
-    property alias buttonSize: titleRow.captionHeight
+    property int buttonSize: 23
     property alias titleAlignment: caption.horizontalAlignment
     property color titleBarColor: options.titleBarColor
     property color borderColor: options.borderColor
@@ -204,7 +204,7 @@ Decoration {
                     GradientStop { position: 0.5; color: root.titleBarColor }
                     GradientStop { position: 0.8; color: root.titleBarColor }
                     GradientStop { position: 1.0; color: Qt.lighter(root.titleBarColor, 1.2) }
-                    }
+                }
                 Rectangle {
                     id: bottomLeftDecoration2
                     anchors {
@@ -265,6 +265,7 @@ Decoration {
             }
         }
 
+        // Title bar.
         Rectangle {
             id: top
             radius: roundness - 2
@@ -280,15 +281,18 @@ Decoration {
                 leftMargin: decoration.client.maximized ? 0 : 1
                 rightMargin: decoration.client.maximized ? 0 : 1
             }
+            color: decoration.client.active ? "#f0eeee" : "black"
+            /*
             gradient: Gradient {
                 id: topGradient
                 GradientStop { position: 0.1; color: Qt.lighter(root.titleBarColor, 1.5) }
                 GradientStop { position: 0.6; color: root.titleBarColor }
                 }
+            */
 
             Item {
                 id: titleRow
-                property real captionHeight: caption.implicitHeight + 4
+                property real captionHeight: 32
                 property int topMargin: 2
                 property int bottomMargin: 2
                 property real normalHeight: captionHeight + bottomMargin + topMargin
@@ -322,6 +326,7 @@ Decoration {
                         left: parent.left
                     }
                 }
+                // Title bar title.
                 Text {
                     id: caption
                     textFormat: Text.PlainText
@@ -330,10 +335,10 @@ Decoration {
                         left: leftButtonGroup.right
                         right: rightButtonGroup.left
                         rightMargin: 5
-                        leftMargin: 5
-                        topMargin: 1
+                        leftMargin: 50
+                        topMargin: 2
                     }
-                    color: options.fontColor
+                    color: "black"
                     text: decoration.client.caption
                     font: options.titleFont
                     style: decoration.client.active && root.titleShadow ? Text.Raised : Text.Normal

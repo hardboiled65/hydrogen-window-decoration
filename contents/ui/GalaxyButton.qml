@@ -65,6 +65,7 @@ DecorationButton {
     property color baseSurfaceBottom: baseConturTop
     width: size
     height: size
+    // Button
     Rectangle {
         radius: width / 2
         smooth: true
@@ -104,7 +105,7 @@ DecorationButton {
                 color: Qt.darker("white", 1.6)
             }
         }
-    }
+    } // Button
     Item {
         property int imageWidth: button.width > 14 ? button.width - 2 * Math.floor(button.width/3.5) : button.width - 6
         property int imageHeight: button.height > 14 ? button.height - 2 * Math.floor(button.height/3.5) : button.height - 6
