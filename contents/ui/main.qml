@@ -322,8 +322,10 @@ Decoration {
                     closeButton: closeButtonComponent
                     buttons: options.titleButtonsLeft
                     anchors {
+                        // verticalCenter: parent.verticalCenter
                         top: parent.top
                         left: parent.left
+                        topMargin: 4
                     }
                 }
                 // Title bar title.
@@ -364,6 +366,7 @@ Decoration {
                     anchors {
                         top: parent.top
                         right: parent.right
+                        topMargin: 4
                     }
                 }
                 Component.onCompleted: {
