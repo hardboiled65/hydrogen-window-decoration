@@ -281,14 +281,7 @@ Decoration {
                 leftMargin: decoration.client.maximized ? 0 : 1
                 rightMargin: decoration.client.maximized ? 0 : 1
             }
-            color: decoration.client.active ? "#f0eeee" : "black"
-            /*
-            gradient: Gradient {
-                id: topGradient
-                GradientStop { position: 0.1; color: Qt.lighter(root.titleBarColor, 1.5) }
-                GradientStop { position: 0.6; color: root.titleBarColor }
-                }
-            */
+            color: decoration.client.active ? "#f0eeee" : "#a0a0a0"
 
             Item {
                 id: titleRow
