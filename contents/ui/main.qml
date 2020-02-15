@@ -20,6 +20,8 @@ import org.kde.kwin.decoration 0.1
 import org.kde.kwin.decorations.plastik 1.0
 
 Decoration {
+    id: root
+
     function readBorderSize() {
         switch (borderSize) {
         case DecorationOptions.BorderTiny:
@@ -63,6 +65,7 @@ Decoration {
             break;
         }
     }
+
     function readConfig() {
         var titleAlignLeft = decoration.readConfig("titleAlignLeft", true);
         var titleAlignCenter = decoration.readConfig("titleAlignCenter", false);
@@ -80,10 +83,10 @@ Decoration {
         root.titleShadow = decoration.readConfig("titleShadow", true);
         root.roundness = decoration.readConfig("roundness", 5);
     }
-    
+
     ColorHelper { id: colorHelper }
     DecorationOptions { id: options; deco: decoration }
-    
+
     property int borderSize: decorationSettings.borderSize
     property int buttonSize: 23
     property alias titleAlignment: caption.horizontalAlignment
@@ -91,8 +94,8 @@ Decoration {
     property color borderColor: options.borderColor
     property bool titleShadow: true
     property int roundness : 5
-    id: root
     alpha: false
+
     Rectangle {
         id: baseRect
         radius: roundness
