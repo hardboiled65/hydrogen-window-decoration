@@ -281,7 +281,7 @@ Decoration {
                 leftMargin: decoration.client.maximized ? 0 : 1
                 rightMargin: decoration.client.maximized ? 0 : 1
             }
-            color: decoration.client.active ? "#f0eeee" : "#a0a0a0"
+            color: decoration.client.active ? "#bebab3" : "#a0a0a0"
 
             Item {
                 id: titleRow
