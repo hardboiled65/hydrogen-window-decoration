@@ -99,11 +99,11 @@ Decoration {
     Rectangle {
         id: baseRect
         radius: roundness
-        color: root.borderColor
+        color: "red" //root.borderColor
         anchors { fill: parent }
         border {
             width: decoration.client.maximized ? 0 : 1
-            color: colorHelper.shade(root.borderColor, ColorHelper.ShadowShade, 1.0)
+            color: "blue" //colorHelper.shade(root.borderColor, ColorHelper.ShadowShade, 1.0)
         }
         Rectangle {
             id: borderLeft
@@ -187,11 +187,6 @@ Decoration {
             height: root.borders.bottom
             visible: !decoration.client.maximized
             color: "white"
-            gradient: Gradient {
-                id: borderBottomGradient
-                GradientStop { position: 0.4; color: borderBottom.color }
-                GradientStop { position: 0.9; color: Qt.darker(borderBottom.color, 1.5) }
-                }
             Rectangle {
                 id: bottomLeftDecoration
                 anchors {
@@ -201,13 +196,6 @@ Decoration {
                 height: root.borders.bottom > 10 ? root.borders.bottom + top.height / 2 : top.height / 2
                 width: height
                 color: root.titleBarColor
-                gradient: Gradient {
-                    id: bottomLeftDecorationGradient
-                    GradientStop { position: 0.1; color: Qt.lighter(root.titleBarColor, 2) }
-                    GradientStop { position: 0.5; color: root.titleBarColor }
-                    GradientStop { position: 0.8; color: root.titleBarColor }
-                    GradientStop { position: 1.0; color: Qt.lighter(root.titleBarColor, 1.2) }
-                }
                 Rectangle {
                     id: bottomLeftDecoration2
                     anchors {
@@ -238,13 +226,6 @@ Decoration {
                 height: root.borders.bottom > 10 ? root.borders.bottom + top.height / 2 : top.height / 2
                 width: height
                 color: root.titleBarColor
-                gradient: Gradient {
-                    id: bottomRightDecorationGradient
-                    GradientStop { position: 0.1; color: Qt.lighter(root.titleBarColor, 2) }
-                    GradientStop { position: 0.5; color: root.titleBarColor }
-                    GradientStop { position: 0.8; color: root.titleBarColor }
-                    GradientStop { position: 1.0; color: Qt.lighter(root.titleBarColor, 1.2) }
-                    }
                 Rectangle {
                     id: bottomRightDecoration2
                     anchors {
@@ -270,6 +251,12 @@ Decoration {
 
         // Title bar.
         Rectangle {
+            Rectangle {
+              color: "red"
+              anchors.centerIn: parent
+              width: 50
+              height: 50
+            }
             id: top
             radius: roundness - 2
             property int topMargin: 1
