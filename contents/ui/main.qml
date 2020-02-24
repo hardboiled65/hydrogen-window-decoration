@@ -251,13 +251,8 @@ Decoration {
 
         // Title bar.
         Rectangle {
-            Rectangle {
-              color: "red"
-              anchors.centerIn: parent
-              width: 50
-              height: 50
-            }
             id: top
+
             radius: roundness - 2
             property int topMargin: 1
             property real normalHeight: titleRow.normalHeight + topMargin + 1
@@ -326,8 +321,7 @@ Decoration {
                     color: "black"
                     text: decoration.client.caption
                     font: options.titleFont
-                    style: decoration.client.active && root.titleShadow ? Text.Raised : Text.Normal
-                    styleColor: colorHelper.shade(color, ColorHelper.ShadowShade, 1.0)
+                    // font.pixelSize: 14
                     elide: Text.ElideMiddle
                     renderType: Text.NativeRendering
                 }
