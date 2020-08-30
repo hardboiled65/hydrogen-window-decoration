@@ -307,13 +307,9 @@ Decoration {
                 // Title bar title.
                 Text {
                     id: caption
+                    anchors.centerIn: parent
+
                     textFormat: Text.PlainText
-                    anchors {
-                        centerIn: parent
-                        rightMargin: 5
-                        leftMargin: 50
-                        topMargin: 2
-                    }
                     color: "black"
                     text: decoration.client.caption
                     font: options.titleFont
