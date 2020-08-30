@@ -276,9 +276,7 @@ Decoration {
                 property real normalHeight: captionHeight + bottomMargin + topMargin
                 property real maximizedHeight: captionHeight + bottomMargin
                 anchors {
-                    left: parent.left
-                    right: parent.right
-                    top: parent.top
+                    fill: parent
                     topMargin: decoration.client.maximized ? 0 : titleRow.topMargin
                     leftMargin: decoration.client.maximized ? 0 : 4
                     rightMargin: decoration.client.maximized ? 0 : 4
@@ -311,9 +309,7 @@ Decoration {
                     id: caption
                     textFormat: Text.PlainText
                     anchors {
-                        top: parent.top
-                        left: leftButtonGroup.right
-                        right: rightButtonGroup.left
+                        centerIn: parent
                         rightMargin: 5
                         leftMargin: 50
                         topMargin: 2
