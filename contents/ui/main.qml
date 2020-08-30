@@ -286,7 +286,7 @@ Decoration {
                     id: leftButtonGroup
                     spacing: 4
                     explicitSpacer: root.buttonSize
-                    menuButton: menuButtonComponent
+//                    menuButton: menuButtonComponent
                     appMenuButton: appMenuButtonComponent
                     minimizeButton: minimizeButtonComponent
                     maximizeButton: maximizeButtonComponent
@@ -305,9 +305,28 @@ Decoration {
                     }
                 }
                 // Title bar title.
-                Text {
+                Item {
+                  id: iconAndCaption
+
+                  anchors.centerIn: parent
+
+                  width: root.buttonSize + 16 + caption.implicitWidth
+                  height: caption.implicitHeight
+
+//                  Rectangle {
+//                    anchors.fill: parent
+//                    color: "#50ff0000"
+//                  }
+
+                  ButtonGroup {
+                    id: iconButton
+
+                    menuButton: menuButtonComponent
+                    buttons: options.titleButtonsLeft
+                  }
+                  Text {
                     id: caption
-                    anchors.centerIn: parent
+                    anchors.right: parent.right
 
                     textFormat: Text.PlainText
                     color: "black"
@@ -316,6 +335,7 @@ Decoration {
                     // font.pixelSize: 14
                     elide: Text.ElideMiddle
                     renderType: Text.NativeRendering
+                  }
                 }
                 ButtonGroup {
                     id: rightButtonGroup
