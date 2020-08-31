@@ -1,6 +1,7 @@
 /********************************************************************
 Copyright (C) 2012 Martin Gräßlin <mgraesslin@kde.org>
 Copyright (C) 2015-2017 Giacomo Barazzetti <giacomosrv@gmail.com>
+Copyright (C) 2020 Yujeonja <hardboiled65@gmail.com>
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
