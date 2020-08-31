@@ -25,44 +25,41 @@ Decoration {
     function readBorderSize() {
         switch (borderSize) {
         case DecorationOptions.BorderTiny:
-            borders.setBorders(3);
-            extendedBorders.setAllBorders(0);
-            break;
+          debugText.text = "DecorationOptions.BorderTiny"
+          break;
         case DecorationOptions.BorderLarge:
-            borders.setBorders(8);
-            extendedBorders.setAllBorders(0);
-            break;
+          debugText.text = "DecorationOptions.BorderLarge"
+          break;
         case DecorationOptions.BorderVeryLarge:
-            borders.setBorders(12);
-            extendedBorders.setAllBorders(0);
-            break;
+          debugText.text = "DecorationOptions.BorderVeryLarge"
+          break;
         case DecorationOptions.BorderHuge:
-            borders.setBorders(18);
-            extendedBorders.setAllBorders(0);
-            break;
+          debugText.text = "DecorationOptions.BorderHuge"
+          break;
         case DecorationOptions.BorderVeryHuge:
-            borders.setBorders(27);
-            extendedBorders.setAllBorders(0);
-            break;
+          debugText.text = "DecorationOptions.BorderVeryHuge"
+          break;
         case DecorationOptions.BorderOversized:
-            borders.setBorders(40);
-            extendedBorders.setAllBorders(0);
-            break;
+          debugText.text = "DecorationOptions.BorderOversized"
+          break;
         case DecorationOptions.BorderNoSides:
-            borders.setBorders(5);
-            borders.setSideBorders(1);
-            extendedBorders.setSideBorders(3);
-            break;
+          debugText.text = "DecorationOptions.BorderNoSides"
+          borders.setBorders(5);
+          borders.setSideBorders(1);
+          extendedBorders.setSideBorders(3);
+          break;
         case DecorationOptions.BorderNone:
-            borders.setBorders(1);
-            extendedBorders.setBorders(3);
-            break;
+          debugText.text = "DecorationOptions.BorderNone"
+          borders.setBorders(1);
+          extendedBorders.setBorders(3);
+          break;
         case DecorationOptions.BorderNormal: // fall through to default
         default:
-            borders.setBorders(7);
-            borders.setSideBorders(5);
-            extendedBorders.setAllBorders(0);
-            break;
+          debugText.text = "DecorationOptions.BorderNormal"
+          borders.setBorders(7);
+          borders.setSideBorders(5);
+          extendedBorders.setAllBorders(0);
+          break;
         }
     }
 
@@ -76,12 +73,10 @@ Decoration {
             root.titleAlignment = Text.AlignHCenter;
         } else {
             if (!titleAlignLeft) {
-                console.log("Error reading title alignment: all alignment options are false");
+                debugText = "Error reading title alignment: all alignment options are false";
             }
             root.titleAlignment = Text.AlignLeft;
         }
-        root.titleShadow = decoration.readConfig("titleShadow", true);
-        root.roundness = decoration.readConfig("roundness", 5);
     }
 
     ColorHelper { id: colorHelper }
@@ -98,13 +93,14 @@ Decoration {
 
     Rectangle {
         id: baseRect
-        radius: roundness
-        color: "red" //root.borderColor
+        radius: 8
+        color: "transparent" //root.borderColor
         anchors { fill: parent }
         border {
             width: decoration.client.maximized ? 0 : 1
             color: "blue" //colorHelper.shade(root.borderColor, ColorHelper.ShadowShade, 1.0)
         }
+
         Rectangle {
             id: borderLeft
             anchors {
@@ -138,7 +134,6 @@ Decoration {
                     color: colorHelper.shade(root.borderColor, ColorHelper.ShadowShade, 0.0) // as baseRect border
                 }
             }
-            
         }
         Rectangle {
             id: borderRight
@@ -252,8 +247,15 @@ Decoration {
         // Title bar.
         Rectangle {
             id: top
+            Text {
+              id: debugText
+              visible: false
+              x: 128
 
-            radius: roundness - 2
+              text: "debug"
+            }
+
+            radius: 8
             property int topMargin: 1
             property real normalHeight: titleRow.normalHeight + topMargin + 1
             property real maximizedHeight: titleRow.maximizedHeight + 1
