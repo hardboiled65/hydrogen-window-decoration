@@ -23,63 +23,6 @@ import org.kde.kwin.decorations.plastik 1.0
 Decoration {
     id: root
 
-    function readBorderSize() {
-        switch (borderSize) {
-        case DecorationOptions.BorderTiny:
-          debugText.text = "DecorationOptions.BorderTiny"
-          break;
-        case DecorationOptions.BorderLarge:
-          debugText.text = "DecorationOptions.BorderLarge"
-          break;
-        case DecorationOptions.BorderVeryLarge:
-          debugText.text = "DecorationOptions.BorderVeryLarge"
-          break;
-        case DecorationOptions.BorderHuge:
-          debugText.text = "DecorationOptions.BorderHuge"
-          break;
-        case DecorationOptions.BorderVeryHuge:
-          debugText.text = "DecorationOptions.BorderVeryHuge"
-          break;
-        case DecorationOptions.BorderOversized:
-          debugText.text = "DecorationOptions.BorderOversized"
-          break;
-        case DecorationOptions.BorderNoSides:
-          debugText.text = "DecorationOptions.BorderNoSides"
-          borders.setBorders(5);
-          borders.setSideBorders(1);
-          extendedBorders.setSideBorders(3);
-          break;
-        case DecorationOptions.BorderNone:
-          debugText.text = "DecorationOptions.BorderNone"
-          borders.setBorders(1);
-          extendedBorders.setBorders(3);
-          break;
-        case DecorationOptions.BorderNormal: // fall through to default
-        default:
-          debugText.text = "DecorationOptions.BorderNormal"
-          borders.setBorders(7);
-          borders.setSideBorders(5);
-          extendedBorders.setAllBorders(0);
-          break;
-        }
-    }
-
-    function readConfig() {
-        var titleAlignLeft = decoration.readConfig("titleAlignLeft", true);
-        var titleAlignCenter = decoration.readConfig("titleAlignCenter", false);
-        var titleAlignRight = decoration.readConfig("titleAlignRight", false);
-        if (titleAlignRight) {
-            root.titleAlignment = Text.AlignRight;
-        } else if (titleAlignCenter) {
-            root.titleAlignment = Text.AlignHCenter;
-        } else {
-            if (!titleAlignLeft) {
-                debugText = "Error reading title alignment: all alignment options are false";
-            }
-            root.titleAlignment = Text.AlignLeft;
-        }
-    }
-
     ColorHelper { id: colorHelper }
     DecorationOptions { id: options; deco: decoration }
 
@@ -285,51 +228,56 @@ Decoration {
                     rightMargin: decoration.client.maximized ? 0 : 4
                     bottomMargin: titleRow.bottomMargin
                 }
-                ButtonGroup {
-                    id: leftButtonGroup
-                    spacing: 4
-                    explicitSpacer: root.buttonSize
-//                    menuButton: menuButtonComponent
-                    appMenuButton: appMenuButtonComponent
-                    minimizeButton: minimizeButtonComponent
-                    maximizeButton: maximizeButtonComponent
-                    keepBelowButton: keepBelowButtonComponent
-                    keepAboveButton: keepAboveButtonComponent
-                    helpButton: helpButtonComponent
-                    shadeButton: shadeButtonComponent
-                    allDesktopsButton: stickyButtonComponent
-                    closeButton: closeButtonComponent
-                    buttons: options.titleButtonsLeft
-                    anchors {
-                        // verticalCenter: parent.verticalCenter
-                        top: parent.top
-                        left: parent.left
-                        topMargin: 4
-                    }
-                }
+
                 // Title bar title.
                 Item {
                   id: iconAndCaption
 
                   anchors.centerIn: parent
 
-                  width: root.buttonSize + 16 + caption.implicitWidth
+                  width: parent.width
                   height: caption.implicitHeight
 
 //                  Rectangle {
 //                    anchors.fill: parent
 //                    color: "#50ff0000"
 //                  }
+                  GalaxyButton {
+                    id: closeButton
 
-                  ButtonGroup {
-                    id: iconButton
+                    anchors.verticalCenter: parent.verticalCenter
 
-                    menuButton: menuButtonComponent
-                    buttons: options.titleButtonsLeft
+                    buttonType: DecorationOptions.DecorationButtonClose
+                    size: root.buttonSize
                   }
+                  GalaxyButton {
+                    id: maximizeButton
+
+                    anchors.left: closeButton.right
+                    anchors.verticalCenter: parent.verticalCenter
+
+                    buttonType: DecorationOptions.DecorationButtonMaximizeRestore
+                    size: root.buttonSize
+                  }
+                  GalaxyButton {
+                    id: minimizeButton
+
+                    anchors.left: maximizeButton.right
+                    anchors.verticalCenter: parent.verticalCenter
+
+                    buttonType: DecorationOptions.DecorationButtonMinimize
+                    size: root.buttonSize
+                  }
+
+                  MenuButton {
+                    anchors.right: caption.left
+                    width: root.buttonSize
+                    height: root.buttonSize
+                  }
+
                   Text {
                     id: caption
-                    anchors.right: parent.right
+                    anchors.centerIn: parent
 
                     textFormat: Text.PlainText
                     color: "black"
@@ -472,18 +420,8 @@ Decoration {
         }
     }
     Component.onCompleted: {
-        borders.setBorders(5);
+        borders.setBorders(1);
         borders.setTitle(top.normalHeight);
         maximizedBorders.setTitle(top.maximizedHeight);
-        readBorderSize();
-        readConfig();
-    }
-    Connections {
-        target: decoration
-        onConfigChanged: root.readConfig()
-    }
-    Connections {
-        target: decorationSettings
-        onBorderSizeChanged: root.readBorderSize();
     }
 }
